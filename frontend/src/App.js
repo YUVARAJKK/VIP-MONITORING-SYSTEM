@@ -20,6 +20,40 @@ const threatColors = {
   critical: "bg-red-100 border-red-500 text-red-800"
 };
 
+const NotificationPopup = ({ notification, onClose }) => {
+  if (!notification) return null;
+
+  const bgColor = notification.type === 'success' 
+    ? 'bg-green-50 border-green-200' 
+    : 'bg-red-50 border-red-200';
+    
+  const textColor = notification.type === 'success'
+    ? 'text-green-800'
+    : 'text-red-800';
+
+  return (
+    <div className="fixed top-4 right-4 z-50 max-w-sm">
+      <div className={`${bgColor} border rounded-lg shadow-lg p-4 ${textColor} animate-slide-in`}>
+        <div className="flex items-start justify-between">
+          <div className="flex-1">
+            <div className="font-semibold text-sm mb-1">{notification.title}</div>
+            <div className="text-sm mb-1">{notification.message}</div>
+            {notification.details && (
+              <div className="text-xs opacity-75">{notification.details}</div>
+            )}
+          </div>
+          <button
+            onClick={onClose}
+            className="ml-3 text-lg leading-none hover:opacity-75"
+          >
+            ×
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const ThreatAlert = ({ alert }) => {
   const formatTime = (timestamp) => {
     return new Date(timestamp).toLocaleString();
