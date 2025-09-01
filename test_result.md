@@ -193,6 +193,18 @@ frontend:
           agent: "main"
           comment: "Beautiful dashboard with threat alerts, monitoring status, platform icons, threat level colors, real-time updates every 15 seconds"
 
+  - task: "Generate Test Alert button functionality"
+    implemented: true
+    working: false
+    file: "/app/frontend/src/App.js"
+    stuck_count: 1
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: false
+          agent: "user"
+          comment: "User reported that the Generate Test Alert button is not working - needs investigation and fix"
+
   - task: "Monitoring controls (start/stop/clear)"
     implemented: true
     working: true
