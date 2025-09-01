@@ -232,6 +232,13 @@ function App() {
     try {
       await axios.post(`${API}/monitoring/stop`);
       await fetchStatus();
+      setNotification({
+        type: 'success',
+        title: '🔴 Monitoring Stopped',
+        message: 'Threat monitoring has been paused',
+        details: 'Click Start Monitoring to resume scanning'
+      });
+      setTimeout(() => setNotification(null), 3000);
     } catch (err) {
       console.error('Error stopping monitoring:', err);
       setError('Failed to stop monitoring');
