@@ -249,9 +249,16 @@ function App() {
   const clearAlerts = async () => {
     if (window.confirm('Are you sure you want to clear all alerts?')) {
       try {
-        await axios.delete(`${API}/alerts`);
+        const response = await axios.delete(`${API}/alerts`);
         await fetchAlerts();
         await fetchStatus();
+        setNotification({
+          type: 'success',
+          title: '🗑️ Alerts Cleared',
+          message: 'All threat alerts have been removed',
+          details: response.data.message || 'Database cleared successfully'
+        });
+        setTimeout(() => setNotification(null), 3000);
       } catch (err) {
         console.error('Error clearing alerts:', err);
         setError('Failed to clear alerts');
