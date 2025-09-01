@@ -214,6 +214,13 @@ function App() {
     try {
       await axios.post(`${API}/monitoring/start`);
       await fetchStatus();
+      setNotification({
+        type: 'success',
+        title: '🟢 Monitoring Started',
+        message: 'Real-time threat monitoring is now active',
+        details: 'Scanning Twitter, Facebook, and Instagram for threats'
+      });
+      setTimeout(() => setNotification(null), 3000);
     } catch (err) {
       console.error('Error starting monitoring:', err);
       setError('Failed to start monitoring');
