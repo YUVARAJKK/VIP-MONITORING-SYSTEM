@@ -310,6 +310,12 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gray-100">
+      {/* Notification Popup */}
+      <NotificationPopup 
+        notification={notification} 
+        onClose={() => setNotification(null)} 
+      />
+      
       {/* Header */}
       <header className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
