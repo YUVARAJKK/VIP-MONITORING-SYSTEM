@@ -454,10 +454,10 @@ class VIPThreatMonitoringTester:
 async def main():
     """Main test execution"""
     tester = VIPThreatMonitoringTester()
-    results = await tester.run_all_tests()
+    await tester.run_all_tests()
     
     # Return exit code based on test results
-    if results["failed"] > 0:
+    if tester.test_results["failed"] > 0:
         sys.exit(1)
     else:
         sys.exit(0)
