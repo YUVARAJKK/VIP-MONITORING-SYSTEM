@@ -214,12 +214,32 @@ function App() {
   // Generate mock alert for testing
   const generateMockAlert = async () => {
     try {
-      await axios.get(`${API}/test/generate-mock-alert`);
+      const response = await axios.get(`${API}/test/generate-mock-alert`);
       await fetchAlerts();
       await fetchStatus();
+      
+      // Show success notification
+      const alertData = response.data.alert;
+      setNotification({
+        type: 'success',
+        title: '✅ Test Alert Generated!',
+        message: `Created ${alertData.threat_level} threat alert from ${alertData.platform}`,
+        details: `Score: ${(alertData.score * 100).toFixed(1)}% | Author: @${alertData.author}`
+      });
+      
+      // Auto-hide notification after 4 seconds
+      setTimeout(() => setNotification(null), 4000);
+      
     } catch (err) {
       console.error('Error generating mock alert:', err);
       setError('Failed to generate mock alert');
+      setNotification({
+        type: 'error',
+        title: '❌ Error',
+        message: 'Failed to generate test alert',
+        details: err.message
+      });
+      setTimeout(() => setNotification(null), 4000);
     }
   };
 
