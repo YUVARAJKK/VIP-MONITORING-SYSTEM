@@ -149,6 +149,7 @@ function App() {
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [notification, setNotification] = useState(null);
 
   // Fetch alerts from API
   const fetchAlerts = useCallback(async () => {
